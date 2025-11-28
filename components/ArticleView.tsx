@@ -57,6 +57,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
           <img
             src={article.imageUrl}
             alt={article.title}
+            loading="lazy"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-tech-slate to-transparent"></div>
@@ -122,6 +123,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                                 <img
                                   src={src}
                                   alt={alt}
+                                  loading="lazy"
                                   className="w-full h-auto object-cover max-h-[500px]"
                                 />
                                </div>
