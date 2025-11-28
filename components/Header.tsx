@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, searchQuery, setSearchQuery
             {/* Primary Logo: Circular Frame */}
             <div className="relative h-16 w-16 md:h-20 md:w-20 transition-transform duration-300 group-hover:scale-105">
               <img
-                src="../images/logo.png"
+                src="./images/logo.png"
                 alt="Tech Media Spotlight"
                 className="h-full w-full object-cover rounded-full border-2 border-white/10 group-hover:border-neon-cyan/50 transition-colors drop-shadow-[0_0_15px_rgba(0,243,255,0.3)]"
               />
