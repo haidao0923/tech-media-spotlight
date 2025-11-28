@@ -129,9 +129,9 @@ export const INITIAL_ARTICLES: Article[] = [
     ## The Process
 
     The setup was deceptively simple. Attendees were invited to step inside the purple phonebooth and read a short prompt into a microphone. Within seconds, the system discretely took the attendee's picture and analyzed their voice pattern.
+    ![Accenture phone booth at CES 2025](./images/articles/accenture-deepfake-ces-2025/1.png)
 
     ## The Result
-    ![Accenture phone booth at CES 2025](./images/articles/accenture-deepfake-ces-2025/1.png)
 
     Within seconds, a digital avatar appeared. It looked like the user. It sounded like the user. But the words coming out of its mouth were not ones they had ever spoken.
 

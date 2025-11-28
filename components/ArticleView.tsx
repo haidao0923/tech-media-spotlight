@@ -3,14 +3,17 @@ import React from 'react';
 import { Article } from '../types';
 import { ArrowLeft, Calendar, Share2, Globe } from 'lucide-react';
 import { getAuthor } from '../authors';
+import { INITIAL_ARTICLES } from '../articles';
+import ArticleCard from './ArticleCard';
 
 interface ArticleViewProps {
   article: Article;
   onBack: () => void;
   onAuthorClick: (author: string) => void;
+  onReadArticle: (article: Article) => void;
 }
 
-const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClick }) => {
+const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClick, onReadArticle }) => {
   // Robust split to handle newlines with potential indentation/whitespace
   const paragraphs = article.content.split(/\n\s*\n/);
   const author = getAuthor(article.author);
@@ -27,25 +30,37 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
     }
   };
 
+  // Logic to find related articles based on category overlap
+  const relatedArticles = INITIAL_ARTICLES
+    .filter(a => a.id !== article.id) // Exclude current article
+    .map(a => ({
+      article: a,
+      // Score based on how many categories match
+      score: a.category.filter(cat => article.category.includes(cat)).length
+    }))
+    .sort((a, b) => b.score - a.score) // Sort by highest score
+    .slice(0, 3) // Take top 3
+    .map(item => item.article);
+
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <button 
+      <button
         onClick={onBack}
         className="mb-6 flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors"
       >
         <ArrowLeft size={20} /> Back to Feed
       </button>
 
-      <article className="bg-tech-slate/40 rounded-2xl overflow-hidden border border-white/5">
+      <article className="bg-tech-slate/40 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
         {/* Header Image */}
         <div className="relative h-[400px] w-full">
-          <img 
-            src={article.imageUrl} 
-            alt={article.title} 
+          <img
+            src={article.imageUrl}
+            alt={article.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-tech-slate to-transparent"></div>
-          
+
           <div className="absolute bottom-0 left-0 p-8 w-full">
              <div className="flex flex-wrap items-center gap-3 mb-4">
                 {article.category.map((cat, idx) => (
@@ -53,7 +68,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                     {cat}
                   </span>
                 ))}
-                
+
                 {article.isGenerated && (
                   <span className="px-3 py-1 rounded-full bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/50 text-xs font-bold">
                     AI Generated
@@ -64,7 +79,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                {article.title}
              </h1>
              <div className="flex items-center gap-6 text-gray-300 text-sm">
-               <button 
+               <button
                   onClick={() => onAuthorClick(article.author)}
                   className="flex items-center gap-3 group hover:text-neon-cyan transition-colors"
                >
@@ -84,13 +99,13 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
             <p className="lead text-xl text-gray-200 font-light mb-8 italic border-l-4 border-neon-cyan pl-4">
               {article.summary}
             </p>
-            
+
             <div className="space-y-6 text-gray-300 leading-relaxed">
               {paragraphs.map((para, index) => {
                 // Split the paragraph by image markdown, keeping the delimiter so we can process parts
                 // Regex matches ![alt](url)
                 const parts = para.split(/(!\[.*?\]\(.*?\))/g);
-                
+
                 return (
                   <React.Fragment key={index}>
                     {parts.map((part, partIndex) => {
@@ -98,15 +113,15 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
 
                        // Check if this part is an image tag
                        const imgMatch = part.match(/!\[(.*?)\]\((.*?)\)/);
-                       
+
                        if (imgMatch) {
                            const [_, alt, src] = imgMatch;
                            return (
                              <figure key={`${index}-${partIndex}`} className="my-8">
                                <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
-                                <img 
-                                  src={src} 
-                                  alt={alt} 
+                                <img
+                                  src={src}
+                                  alt={alt}
                                   className="w-full h-auto object-cover max-h-[500px]"
                                 />
                                </div>
@@ -114,7 +129,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                              </figure>
                            );
                        }
-                       
+
                        // Check if it's a Header (starts with #)
                        const isHeader = part.trim().startsWith('#');
                        const cleanText = part.replace(/#/g, '').trim();
@@ -144,9 +159,9 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
               <ul className="space-y-2">
                 {article.sourceUrls.map((url, idx) => (
                   <li key={idx}>
-                    <a 
-                      href={url} 
-                      target="_blank" 
+                    <a
+                      href={url}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-gray-400 hover:text-neon-pink transition-colors truncate block"
                     >
@@ -169,6 +184,26 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
           </div>
         </div>
       </article>
+
+      {/* Related Articles Section */}
+      {relatedArticles.length > 0 && (
+        <div className="mt-16 pt-12 border-t border-white/10">
+           <h2 className="text-3xl font-bold text-white mb-8 brand-font flex items-center gap-2">
+             Related Stories
+             <span className="h-2 w-2 rounded-full bg-neon-cyan inline-block ml-2 animate-pulse"></span>
+           </h2>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             {relatedArticles.map((related) => (
+               <ArticleCard
+                 key={related.id}
+                 article={related}
+                 onClick={onReadArticle}
+                 onAuthorClick={onAuthorClick}
+               />
+             ))}
+           </div>
+        </div>
+      )}
     </div>
   );
 };
