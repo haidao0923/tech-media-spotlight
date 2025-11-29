@@ -1,26 +1,31 @@
 
-import React from 'react';
-import { Article } from '../types';
+import React, { useEffect } from 'react';
 import ArticleCard from './ArticleCard';
 import { User, ArrowLeft } from 'lucide-react';
 import { getAuthor } from '../authors';
+import { useParams, useNavigate } from 'react-router-dom';
+import { INITIAL_ARTICLES } from '../articles';
 
-interface AuthorProfileProps {
-  authorName: string;
-  articles: Article[];
-  onReadArticle: (article: Article) => void;
-  onBack: () => void;
-  onAuthorClick: (author: string) => void;
-}
+const AuthorProfile: React.FC = () => {
+  const { name } = useParams<{ name: string }>();
+  const navigate = useNavigate();
+  const authorName = decodeURIComponent(name || '');
 
-const AuthorProfile: React.FC<AuthorProfileProps> = ({ authorName, articles, onReadArticle, onBack, onAuthorClick }) => {
-  const authorArticles = articles.filter(a => a.author === authorName).reverse();
+  // Update SEO title
+  useEffect(() => {
+    if (authorName) {
+      document.title = `${authorName} | Author Profile`;
+      window.scrollTo(0, 0);
+    }
+  }, [authorName]);
+
+  const authorArticles = INITIAL_ARTICLES.filter(a => a.author === authorName).reverse();
   const author = getAuthor(authorName);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-500">
       <button
-        onClick={onBack}
+        onClick={() => navigate('/')}
         className="mb-8 flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors"
       >
         <ArrowLeft size={20} /> Back to Feed
@@ -65,8 +70,6 @@ const AuthorProfile: React.FC<AuthorProfileProps> = ({ authorName, articles, onR
           <ArticleCard
             key={article.id}
             article={article}
-            onClick={onReadArticle}
-            onAuthorClick={onAuthorClick}
           />
         ))}
       </div>

@@ -3,15 +3,15 @@ import React from 'react';
 import { Article } from '../types';
 import { ExternalLink } from 'lucide-react';
 import { getAuthor } from '../authors';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface ArticleCardProps {
   article: Article;
-  onClick: (article: Article) => void;
-  onAuthorClick: (author: string) => void;
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, onAuthorClick }) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   const author = getAuthor(article.author);
+  const navigate = useNavigate();
 
   const getCategoryColor = (category: string) => {
     switch(category) {
@@ -27,8 +27,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, onAuthorCli
   };
 
   return (
-    <div
-      onClick={() => onClick(article)}
+    <Link
+      to={`/article/${article.id}`}
       className="group relative flex flex-col bg-tech-surface/50 rounded-2xl overflow-hidden border border-white/5 hover:border-neon-cyan/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(0,243,255,0.15)] cursor-pointer h-full"
     >
       {/* Image Section */}
@@ -79,8 +79,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, onAuthorCli
             <img src={author.avatar} className="w-6 h-6 rounded-full bg-white/10 object-cover" alt={author.name}/>
             <span
               onClick={(e) => {
-                e.stopPropagation();
-                onAuthorClick(article.author);
+                e.preventDefault(); // Prevent Link navigation
+                navigate(`/author/${encodeURIComponent(article.author)}`);
               }}
               className="text-xs text-gray-300 font-medium hover:text-neon-cyan cursor-pointer transition-colors relative z-10"
             >
@@ -93,7 +93,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, onAuthorCli
 
       {/* Hover overlay flash */}
       <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-    </div>
+    </Link>
   );
 };
 

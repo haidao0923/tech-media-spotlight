@@ -1,19 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, Mail, User, MessageSquare, ArrowLeft, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { useNavigate } from 'react-router-dom';
 
-interface ContactProps {
-  onBack: () => void;
-}
-
-const Contact: React.FC<ContactProps> = ({ onBack }) => {
+const Contact: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    document.title = "Contact Us | Tech Media Spotlight";
+  }, []);
 
   // TODO: Replace these with your actual EmailJS credentials
   const SERVICE_ID = 'service_atdncm5';
@@ -22,7 +24,7 @@ const Contact: React.FC<ContactProps> = ({ onBack }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) return;
 
@@ -33,9 +35,9 @@ const Contact: React.FC<ContactProps> = ({ onBack }) => {
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          name_from: formData.name,   // Maps to {{name_from}} in your template
-          email_from: formData.email, // Maps to {{email_from}} in your template
-          message: formData.message   // Maps to {{message}} in your template
+          name_from: formData.name,
+          email_from: formData.email,
+          message: formData.message
         },
         PUBLIC_KEY
       );
@@ -54,8 +56,8 @@ const Contact: React.FC<ContactProps> = ({ onBack }) => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <button 
-        onClick={onBack}
+      <button
+        onClick={() => navigate('/')}
         className="mb-8 flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors"
       >
         <ArrowLeft size={20} /> Back to Feed
@@ -65,7 +67,7 @@ const Contact: React.FC<ContactProps> = ({ onBack }) => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4 brand-font">Get in Touch</h1>
           <p className="text-gray-400 max-w-lg mx-auto">
-            Have a scoop on the latest tech? Want to collaborate or just say hi? 
+            Have a scoop on the latest tech? Want to collaborate or just say hi?
             Send us a message directly.
           </p>
         </div>

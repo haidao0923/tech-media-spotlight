@@ -19,8 +19,6 @@ export interface Author {
   bio: string;
 }
 
-export type ViewMode = 'home' | 'article' | 'author' | 'contact';
-
 export interface GenerateArticleRequest {
   topic: string;
   category: string;

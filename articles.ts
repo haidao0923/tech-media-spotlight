@@ -27,20 +27,6 @@ export const INITIAL_ARTICLES: Article[] = [
     author: 'Hai Dao'
   },
   {
-    id: 'smart-home-2',
-    title: 'Smart Home 2.0: When Your House Thinks for You',
-    summary: 'Forget voice commands. The new smart home anticipates your needs before you even ask, creating the ultimate cozy environment.',
-    content: `We've moved past "Turn on the lights." The latest update to the Matter protocol integrates predictive AI directly into your home hub. This allows for context-aware automation that feels less like a robot and more like a butler.
-
-    Imagine walking into a room, and the temperature adjusts not because of a schedule, but because your wearable signaled you were running hot from a workout. The lights dim to a warm amber because it knows you're winding down for the day.
-
-    Privacy remains a concern, but with local processing becoming the standard, your home's data stays within your walls. The "Cloud-Free" smart home is finally a reality for the mainstream market.`,
-    category: ['Gadgets', 'Smart Home'],
-    imageUrl: 'https://images.unsplash.com/photo-1558002038-1091a166111c?auto=format&fit=crop&q=80&w=1600',
-    date: 'Oct 23, 2025',
-    author: 'Hai Dao'
-  },
-  {
     id: 'transparent-tech',
     title: 'The Rise of Transparent Tech',
     summary: 'See-through screens and clear casing are back, bringing a retro-futuristic aesthetic to 2025 gadgets.',
@@ -129,7 +115,7 @@ export const INITIAL_ARTICLES: Article[] = [
     ## The Process
 
     The setup was deceptively simple. Attendees were invited to step inside the purple phonebooth and read a short prompt into a microphone. Within seconds, the system discretely took the attendee's picture and analyzed their voice pattern.
-    ![Accenture phone booth at CES 2025](./images/articles/accenture-deepfake-ces-2025/1.png)
+    ![Accenture phone booth at CES 2025](../images/articles/accenture-deepfake-ces-2025/1.png)
 
     ## The Result
 
@@ -141,7 +127,7 @@ export const INITIAL_ARTICLES: Article[] = [
 
     As we move forward, the question isn't just "is this video real?", but "is my voice even my own?"`,
     category: ['AI', 'CES 2025', 'Cybersecurity', 'Spotlight'],
-    imageUrl: './images/articles/accenture-deepfake-ces-2025/0.png',
+    imageUrl: '../images/articles/accenture-deepfake-ces-2025/0.png',
     date: 'Jan 13, 2025',
     author: 'Hai Dao'
   }

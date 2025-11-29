@@ -1,19 +1,37 @@
 
-import React from 'react';
-import { Article } from '../types';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Calendar, Share2, Globe } from 'lucide-react';
 import { getAuthor } from '../authors';
 import { INITIAL_ARTICLES } from '../articles';
 import ArticleCard from './ArticleCard';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
-interface ArticleViewProps {
-  article: Article;
-  onBack: () => void;
-  onAuthorClick: (author: string) => void;
-  onReadArticle: (article: Article) => void;
-}
+const ArticleView: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClick, onReadArticle }) => {
+  const article = INITIAL_ARTICLES.find(a => a.id === id);
+
+  // SEO: Update page title when article loads
+  useEffect(() => {
+    if (article) {
+      document.title = `${article.title} | Tech Media Spotlight`;
+      window.scrollTo(0, 0);
+    }
+  }, [article, id]);
+
+  if (!article) {
+    return (
+      <div className="min-h-[50vh] flex flex-col items-center justify-center text-center px-4">
+        <h2 className="text-3xl font-bold text-white mb-4">Article Not Found</h2>
+        <p className="text-gray-400 mb-8">The article you are looking for does not exist.</p>
+        <button onClick={() => navigate('/')} className="text-neon-cyan hover:underline">
+          Return Home
+        </button>
+      </div>
+    );
+  }
+
   // Robust split to handle newlines with potential indentation/whitespace
   const paragraphs = article.content.split(/\n\s*\n/);
   const author = getAuthor(article.author);
@@ -43,9 +61,9 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
     .map(item => item.article);
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <button
-        onClick={onBack}
+        onClick={() => navigate('/')}
         className="mb-6 flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors"
       >
         <ArrowLeft size={20} /> Back to Feed
@@ -80,15 +98,15 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                {article.title}
              </h1>
              <div className="flex items-center gap-6 text-gray-300 text-sm">
-               <button
-                  onClick={() => onAuthorClick(article.author)}
+               <Link
+                  to={`/author/${encodeURIComponent(article.author)}`}
                   className="flex items-center gap-3 group hover:text-neon-cyan transition-colors"
                >
                   <img src={author.avatar} alt={author.name} className="w-8 h-8 rounded-full border border-neon-cyan object-cover" />
                   <span className="underline decoration-transparent group-hover:decoration-neon-cyan transition-all underline-offset-4 font-medium">
                     {article.author}
                   </span>
-               </button>
+               </Link>
                <span className="flex items-center gap-2"><Calendar size={16} className="text-neon-pink"/> {article.date}</span>
              </div>
           </div>
@@ -103,8 +121,6 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
 
             <div className="space-y-6 text-gray-300 leading-relaxed">
               {paragraphs.map((para, index) => {
-                // Split the paragraph by image markdown, keeping the delimiter so we can process parts
-                // Regex matches ![alt](url)
                 const parts = para.split(/(!\[.*?\]\(.*?\))/g);
 
                 return (
@@ -112,7 +128,6 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                     {parts.map((part, partIndex) => {
                        if (!part.trim()) return null;
 
-                       // Check if this part is an image tag
                        const imgMatch = part.match(/!\[(.*?)\]\((.*?)\)/);
 
                        if (imgMatch) {
@@ -132,7 +147,6 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                            );
                        }
 
-                       // Check if it's a Header (starts with #)
                        const isHeader = part.trim().startsWith('#');
                        const cleanText = part.replace(/#/g, '').trim();
 
@@ -199,8 +213,6 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, onAuthorClic
                <ArticleCard
                  key={related.id}
                  article={related}
-                 onClick={onReadArticle}
-                 onAuthorClick={onAuthorClick}
                />
              ))}
            </div>
