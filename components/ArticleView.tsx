@@ -20,6 +20,16 @@ const ArticleView: React.FC = () => {
     }
   }, [article, id]);
 
+  // Helper function to parse bold text (**text**)
+  const formatText = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-white font-bold">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
   if (!article) {
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center text-center px-4">
@@ -130,35 +140,64 @@ const ArticleView: React.FC = () => {
 
                        const imgMatch = part.match(/!\[(.*?)\]\((.*?)\)/);
 
-                       if (imgMatch) {
-                           const [_, alt, src] = imgMatch;
-                           return (
-                             <figure key={`${index}-${partIndex}`} className="my-8">
-                               <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
-                                <img
-                                  src={src}
-                                  alt={alt}
-                                  loading="lazy"
-                                  className="w-full h-auto object-cover max-h-[500px]"
-                                />
-                               </div>
-                               {alt && <figcaption className="mt-3 text-center text-sm text-neon-cyan/80 font-medium tracking-wide">{alt}</figcaption>}
-                             </figure>
-                           );
-                       }
+                      if (imgMatch) {
+                        const [_, alt, src] = imgMatch;
+                        return (
+                          <figure key={`${index}-${partIndex}`} className="my-8">
+                            <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
+                            <img
+                              src={src}
+                              alt={alt}
+                              loading="lazy"
+                              className="w-full h-auto object-cover max-h-[500px]"
+                            />
+                            </div>
+                            {alt && <figcaption className="mt-3 text-center text-sm text-neon-cyan/80 font-medium tracking-wide">{alt}</figcaption>}
+                          </figure>
+                        );
+                      }
 
-                       const isHeader = part.trim().startsWith('#');
-                       const cleanText = part.replace(/#/g, '').trim();
+                      const cleanText = part.trim();
+                      const isHeader = cleanText.startsWith('#');
 
-                       if (isHeader) {
-                         return (
-                           <h3 key={`${index}-${partIndex}`} className="text-2xl font-bold text-white mt-8 mb-4 brand-font border-b border-white/10 pb-2">
-                             {cleanText}
-                           </h3>
-                         );
-                       }
+                      if (isHeader) {
+                        const headerText = cleanText.replace(/^#+\s*/, '');
+                        return (
+                          <h3 key={`${index}-${partIndex}`} className="text-2xl font-bold text-white mt-8 mb-4 brand-font border-b border-white/10 pb-2">
+                            {formatText(headerText)}
+                          </h3>
+                        );
+                      }
 
-                       return <p key={`${index}-${partIndex}`}>{cleanText}</p>;
+                      // Numeric List Detection (1. Item)
+                      if (/^\d+\./.test(cleanText)) {
+                        const listItems = part.split('\n').filter(l => l.trim().length > 0);
+                        return (
+                          <ol key={`${index}-${partIndex}`} className="list-decimal list-outside space-y-2 my-4 pl-5 text-gray-300">
+                            {listItems.map((item, idx) => (
+                              <li key={idx} className="pl-1">
+                                {formatText(item.trim().replace(/^\d+\.\s*/, ''))}
+                              </li>
+                            ))}
+                          </ol>
+                        );
+                      }
+
+                      // Bullet List Detection (- Item or * Item)
+                      if (/^[\-\*]\s+/.test(cleanText)) {
+                          const listItems = part.split('\n').filter(l => l.trim().length > 0);
+                          return (
+                            <ul key={`${index}-${partIndex}`} className="list-disc list-outside space-y-2 my-4 pl-5 text-gray-300">
+                              {listItems.map((item, idx) => (
+                                <li key={idx} className="pl-1">
+                                  {formatText(item.trim().replace(/^[\-\*]\s*/, ''))}
+                                </li>
+                              ))}
+                            </ul>
+                          );
+                      }
+
+                      return <p key={`${index}-${partIndex}`}>{formatText(cleanText)}</p>;
                     })}
                   </React.Fragment>
                 );

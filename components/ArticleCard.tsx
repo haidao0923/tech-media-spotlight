@@ -22,6 +22,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
       case 'Mobile': return 'bg-green-500 text-white';
       case 'Spotlight': return 'bg-neon-pink/90 text-white';
       case 'CES 2025': return 'bg-white text-black';
+      case 'CES 2026': return 'bg-white text-black';
       default: return 'bg-tech-surface border border-white/20 text-gray-300';
     }
   };

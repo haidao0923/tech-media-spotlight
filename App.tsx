@@ -12,10 +12,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-deep-space text-white font-sans selection:bg-neon-pink selection:text-white pb-20">
-      <Header
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <Header/>
 
       <main>
         <Routes>

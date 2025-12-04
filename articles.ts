@@ -27,56 +27,6 @@ export const INITIAL_ARTICLES: Article[] = [
     author: 'Hai Dao'
   },
   {
-    id: 'transparent-tech',
-    title: 'The Rise of Transparent Tech',
-    summary: 'See-through screens and clear casing are back, bringing a retro-futuristic aesthetic to 2025 gadgets.',
-    content: `Nostalgia is a powerful drug, and the tech industry is hooked. Reminiscent of the late 90s "Atomic Purple" era, we are seeing a resurgence of transparent electronics—but with a modern twist.
-
-    ![Futuristic transparent device concept](https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=80&w=1200)
-
-    It's not just plastic casing anymore. We're talking about transparent OLED displays on laptops that allow you to see the environment behind your screen, perfect for AR applications without the headset.
-
-    ![I changed q here](https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=40&w=1200)
-
-    From earbuds that show off their circuitry to phones with clear backs revealing the liquid cooling systems, transparency is the new black. It represents an honesty in engineering and a celebration of the hardware that powers our lives.`,
-    category: ['Spotlight', 'Design'],
-    imageUrl: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1600',
-    date: 'Oct 22, 2025',
-    author: 'Hai Dao'
-  },
-  {
-    id: 'ces-transparent-tv',
-    title: 'CES 2025: The Year Screens Disappeared',
-    summary: 'Samsung and LG wowed crowds with transparent MicroLED displays that look like clear glass when off and brilliant windows when on.',
-    content: `At CES 2025, the black rectangle that has dominated our living rooms for decades finally vanished. Both Samsung and LG showcased production-ready transparent MicroLED panels.
-
-    ## The "Invisible" TV
-
-    ![Living room with transparent display technology](https://images.unsplash.com/photo-1517420879524-86d64ac2f339?auto=format&fit=crop&q=80&w=1200)
-
-    When turned off, these displays are practically indistinguishable from a pane of glass. You can see your wallpaper, your shelves, or the view outside right through them. But with the press of a button, high-contrast pixels ignite to display 8K content with startling clarity.
-
-    This technology isn't just for movies; it's being pitched as a dynamic dashboard for smart homes, displaying weather, news, and art without obstructing the flow of the room.`,
-    category: ['Gadgets', 'CES 2025'],
-    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1600',
-    date: 'Jan 10, 2025',
-    author: 'Hai Dao'
-  },
-  {
-    id: 'ces-automotive',
-    title: 'CES 2025: The Car is the New Living Room',
-    summary: 'Sony Honda Mobility and Mercedes showcased EV interiors that prioritize digital entertainment and relaxation over driving.',
-    content: `The automotive hall at CES 2025 felt less like a car show and more like a mobile lounge exhibition. With Level 3 and 4 autonomous driving becoming more reliable, manufacturers are reimagining what we do when we aren't holding the wheel.
-
-    ## Gaming on the Go
-
-    Sony Honda Mobility's latest AFEELA prototype features a dashboard that is essentially one massive ultrawide monitor, capable of running AAA console games. Meanwhile, Mercedes unveiled a "Sound Drive" system that remixes music in real-time based on how the car moves, turning your commute into a generative art experience.`,
-    category: ['Spotlight', 'Automotive', 'CES 2025'],
-    imageUrl: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1600',
-    date: 'Jan 11, 2025',
-    author: 'Hai Dao'
-  },
-  {
     id: 'ces-empathic-robots',
     title: 'CES 2025: Robots Get Emotional',
     summary: 'The "Ballie" evolution and new humanoid helpers are moving beyond utility to offer genuine companionship and empathy.',
@@ -93,28 +43,14 @@ export const INITIAL_ARTICLES: Article[] = [
     author: 'Hai Dao'
   },
   {
-    id: 'ces-robots-tested',
-    title: 'CES 2025: Robots Get Tested',
-    summary: 'The "Ballie" evolution and new humanoid helpers are moving beyond utility to offer genuine companionship and empathy.',
-    content: `If previous years were about robots that could vacuum, CES 2025 was about robots that can listen. The trend of "Empathic AI" has hit hardware hard.
-
-    We saw companion bots with expressive OLED faces that mimic human micro-expressions. These assistants use advanced LLMs to hold natural, context-aware conversations. They don't just schedule your appointments; they ask how you're feeling about them.
-
-    One standout demonstration featured a kitchen assistant that not only followed a recipe but suggested comfort food alternatives when it detected the user sounded stressed.`,
-    category: ['AI', 'Robotics', 'CES 2025'],
-    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1600',
-    date: 'Jan 12, 2025',
-    author: 'Hai Dao'
-  },
-  {
     id: 'accenture-deepfake-ces-2025',
     title: 'The Dark Mirror: Accenture\'s Deepfake Phone Booth',
-    summary: 'In a stark warning about the future of identity theft, Accenture invited CES attendees to step into a purple phone booth and watch their digital twins steal their lives.',
+    summary: 'In a stark warning about the future of identity theft, Accenture invited CES attendees to step into a phone booth and watch their digital twins steal their lives.',
     content: `Amidst the flashy TVs and friendly robots at CES 2025, one exhibit offered a colder, more sobering reality check. Accenture's booth featured a retro-style purple phone booth that promised not to connect you with a friend, but to clone you.
 
     ## The Process
 
-    The setup was deceptively simple. Attendees were invited to step inside the purple phonebooth and read a short prompt into a microphone. Within seconds, the system discretely took the attendee's picture and analyzed their voice pattern.
+    The setup was deceptively simple. Attendees were invited to step inside the purple phonebooth and read a short prompt into a microphone. Then, the system discretely took the attendee's picture and analyzed their voice pattern.
     ![Accenture phone booth at CES 2025](../images/articles/accenture-deepfake-ces-2025/1.png)
 
     ## The Result
@@ -126,9 +62,74 @@ export const INITIAL_ARTICLES: Article[] = [
     Accenture's demonstration wasn't about showing off a new product for sale, but rather a public service announcement about the weaponization of Generative AI. By showing how little data is needed to create a convincing impersonation, they highlighted the urgent need for new verification standards in banking and security.
 
     As we move forward, the question isn't just "is this video real?", but "is my voice even my own?"`,
-    category: ['AI', 'CES 2025', 'Cybersecurity', 'Spotlight'],
+    category: ['Spotlight', 'CES 2025', 'AI', 'Cybersecurity'],
     imageUrl: '../images/articles/accenture-deepfake-ces-2025/0.png',
     date: 'Jan 13, 2025',
+    author: 'Hai Dao'
+  },
+  {
+    id: 'alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025',
+    title: 'Customizable Sensors To Extend the Senses: Alps Alpine',
+    summary: 'Alps Alpine returned to CES 2025 to prove how hardware can extend human perception, featuring AI-powered bike safety and touch-free interfaces.',
+    content: `For 77 years, Alps Alpine has been a silent giant in the electronics world, pioneering the development of switches, sensors, and communication devices. Returning to the Consumer Electronics Show this year, they brought their company slogan—"Shaping a future where technology extends your senses"—to life with a diverse lineup of hardware.
+
+    ## Seeing Through the Noise
+
+    On the technical front, the company exhibited the 1A1M Multi-use Millimeter Wave Radar Sensor. While many sensors struggle in adverse weather, this device is capable of detecting multiple objects simultaneously while retaining an incredible level of accuracy in noisy environments filled with rain, snow, or dust.
+    ![Alps Alpine 1A1M Multi-use Millimeter Wave Radar Sensor](../images/articles/alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025/1.png)
+
+
+    ## Eyes in the Back of Your Head
+
+    Perhaps the most eye-catching exhibit for the consumer market was the RS 1000 Bike Camera.
+    ![Alps Alpine RS 1000 Bike Camera](../images/articles/alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025/2.png)
+
+    Designed to attach to the rear of a bicycle, it is equipped with AI object detection. It effectively gives the rider eyes in the back of their head, notifying them of incoming traffic to prevent accidents before they happen.
+
+    ## Touch-Free and Secure
+
+    The booth also featured the AirInput Panel, a futuristic interface allowing for completely touch-free screen interaction. Additionally, for enterprise users, they showcased asset trackers utilizing GPS positioning, Wi-Fi localization, and RFID technologies, allowing companies to rest assured that their assets are securely monitored.
+    ![Alps Alpine AirInput Panel](../images/articles/alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025/3.png)
+
+    ## Customization is Key
+
+    These gadgets were impressive, but the greatest aspect of Alps Alpine remains their flexibility. The company emphasized their ability to customize these sensors for each individual's specific use case, proving that even after nearly eight decades, they are still adapting to the future.`,
+    category: ['CES 2025', 'AI', 'Hardware', 'IoT'],
+    imageUrl: '../images/articles/alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025/0.png',
+    date: 'Jan 14, 2025',
+    author: 'Hai Dao'
+  },
+  {
+    id: 'sims-technology-personal-safety-wearable-ces-2026',
+    title: 'A Sixth Sense for Safety: .simstechnology Wearable',
+    summary: '.simstechnology introduced an AI-powered rear-facing camera designed to give runners and hikers complete situational awareness and emergency response tools.',
+    content: `For anyone who has felt a twitch of anxiety while running alone on a trail or walking home late at night, a new exhibitor at CES 2026 offers a high-tech solution for peace of mind. .simstechnology showcased their flagship wearable, designed to act as a digital guardian for active individuals.
+
+    ## The "Portable Ring Camera"
+
+    The core concept of the gadget addresses a simple human limitation: we cannot see what is behind us. The device functions as a "portable Ring camera" for personal mobility designed to be worn facing rearward.
+
+    Whether attached to the back of clothing, clipped to a hat, secured to a harness, or mounted on a backpack, the camera continuously scans the environment behind the user during activities like hiking, running, or walking.
+
+    ## AI-Powered Awareness
+
+    The device's value lies in its AI processing. It doesn't just record footage; it interprets it. When the camera identifies a person or object approaching the user from behind, it bypasses passive recording and sends an immediate alert to the user's connected smartphone or smartwatch. This gives the user crucial seconds to turn around and assess potential danger.
+    ![.simstechnology wearable device attached to a backpack](../images/articles/sims-technology-personal-safety-wearable-ces-2026/1.png)
+
+    ## Active Protection System
+
+    Beyond simple detection, .simstechnology has built a robust emergency response system into the small hardware package. If the user feels threatened, a physical button press activates a three-stage defense:
+
+    1.  **Evidence Preservation:** Recorded images are immediately offloaded and saved to the cloud.
+    2.  **SOS Beacon:** The user's current GPS location is instantly sent to pre-selected emergency contacts.
+    3.  **Deterrence:** The device emits a loud siren to alert bystanders of imminent danger and potentially scare off an aggressor.
+
+    ## Availability
+
+    While the wearable made its public bow at CES 2026, the company is keen to get the technology to consumers, opening preorders via their website at sims.technology. While a final preorder price has not been set, previous estimates in 2024 suggested a retail target of $199.`,
+    category: ['CES 2026', 'Wearables', 'AI', 'Consumer Tech'],
+    imageUrl: '../images/articles/sims-technology-personal-safety-wearable-ces-2026/0.png',
+    date: 'Jan 15, 2025',
     author: 'Hai Dao'
   }
 ];
