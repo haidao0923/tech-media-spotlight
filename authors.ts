@@ -6,7 +6,7 @@ export const AUTHORS: Record<string, Author> = {
     name: "Hai Dao",
     role: "Tech Editor",
     avatar: "../images/avatar.png",
-    bio: "Tech enthusiast, gadget reviewer, and futurist. Covering the bleeding edge of innovation for Tech Media Spotlight. Obsessed with drones, transparent OLEDs, and the future of AI."
+    bio: "Tech enthusiast, gadget reviewer, and futurist. Covering the bleeding edge of innovation for Tech Media Spotlight. Obsessed with the latest consumer tech and the future of AI."
   }
 };
 

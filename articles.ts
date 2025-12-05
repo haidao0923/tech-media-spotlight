@@ -3,46 +3,6 @@ import { Article } from './types';
 
 export const INITIAL_ARTICLES: Article[] = [
   {
-    id: 'drone-revolution',
-    title: 'Drone Revolution: The Sky is No Limit',
-    summary: 'From delivery services to cinematic masterpieces, consumer drones are reshaping our horizon. We test the latest quadcopters that fit in your pocket.',
-    content: `The buzzing overhead isn't just a nuisance anymore; it's the sound of the future arriving. Consumer drones have evolved from expensive toys for hobbyists into essential tools for creators, explorers, and even delivery services.
-
-    ## The Pocket-Sized Powerhouses
-
-    ![Compact drone maneuvering through a forest](https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200)
-
-    This year, the trend is miniaturization without compromise. The new "Nano-Flyer X" series weighs less than a smartphone but packs a 4K camera on a 3-axis gimbal. This means cinematic shots are now possible for anyone, anywhere. We took it for a spin in high winds, and the stabilization software is nothing short of magic.
-
-    ## AI in the Sky
-
-    Obstacle avoidance has taken a quantum leap. Using LiDAR and visual SLAM, these new drones can navigate dense forests at high speeds without a scratch. It's like having a professional pilot inside the microchip.
-
-    ## What's Next?
-
-    Battery technology is still the bottleneck, but with solid-state batteries on the horizon, 2026 might give us the hour-long flight times we've been dreaming of.`,
-    category: ['Drones', 'Technology'],
-    imageUrl: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=1600',
-    date: 'Oct 24, 2025',
-    author: 'Hai Dao'
-  },
-  {
-    id: 'ces-empathic-robots',
-    title: 'CES 2025: Robots Get Emotional',
-    summary: 'The "Ballie" evolution and new humanoid helpers are moving beyond utility to offer genuine companionship and empathy.',
-    content: `If previous years were about robots that could vacuum, CES 2025 was about robots that can listen. The trend of "Empathic AI" has hit hardware hard.
-
-    ![Friendly robot interacting with a human](https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?auto=format&fit=crop&q=80&w=1200)
-
-    We saw companion bots with expressive OLED faces that mimic human micro-expressions. These assistants use advanced LLMs to hold natural, context-aware conversations. They don't just schedule your appointments; they ask how you're feeling about them.
-
-    One standout demonstration featured a kitchen assistant that not only followed a recipe but suggested comfort food alternatives when it detected the user sounded stressed.`,
-    category: ['AI', 'Robotics', 'CES 2025'],
-    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1600',
-    date: 'Jan 12, 2025',
-    author: 'Hai Dao'
-  },
-  {
     id: 'accenture-deepfake-ces-2025',
     title: 'The Dark Mirror: Accenture\'s Deepfake Phone Booth',
     summary: 'In a stark warning about the future of identity theft, Accenture invited CES attendees to step into a phone booth and watch their digital twins steal their lives.',
@@ -101,7 +61,7 @@ export const INITIAL_ARTICLES: Article[] = [
   },
   {
     id: 'sims-technology-personal-safety-wearable-ces-2026',
-    title: 'A Sixth Sense for Safety: .simstechnology Wearable',
+    title: 'Never Look Back: .simstechnology Personal Safety Wearable',
     summary: '.simstechnology introduced an AI-powered rear-facing camera designed to give runners and hikers complete situational awareness and emergency response tools.',
     content: `For anyone who has felt a twitch of anxiety while running alone on a trail or walking home late at night, a new exhibitor at CES 2026 offers a high-tech solution for peace of mind. .simstechnology showcased their flagship wearable, designed to act as a digital guardian for active individuals.
 
@@ -129,7 +89,67 @@ export const INITIAL_ARTICLES: Article[] = [
     While the wearable made its public bow at CES 2026, the company is keen to get the technology to consumers, opening preorders via their website at sims.technology. While a final preorder price has not been set, previous estimates in 2024 suggested a retail target of $199.`,
     category: ['CES 2026', 'Wearables', 'AI', 'Consumer Tech'],
     imageUrl: '../images/articles/sims-technology-personal-safety-wearable-ces-2026/0.png',
-    date: 'Jan 15, 2025',
+    date: 'Jan 21, 2025',
+    author: 'Hai Dao'
+  },
+  {
+    id: '10minds-putting-snoring-to-bed-motion-pillow-ces-2025',
+    title: 'Putting Snoring to Bed: The AI Motion Pillow by 10minds',
+    summary: 'Winner of multiple innovation awards, 10minds will return to CES 2026 with their AI Motion Pillow, a smart sleep solution that gently inflates to silence snoring without waking the user.',
+    content: `For many, the sound of a good night's sleep is ruined by a partner who sounds less like a resting human and more like an elephant playing a trumpet. South Korean innovator 10minds demonstrate that the solution to this age-old problem isn't a separate room, but a smarter pillow.
+
+    ## The Snoring Solution
+
+    According to a 2022 CDC survey, 37% of adults sleep less than the recommended seven hours, with snoring being a major culprit for sleep disruption. 10minds' answer to this is the AI Motion Pillow, a device that has consistently impressed judges, earning CES Innovation Awards from 2020 through 2025.
+
+    The concept is ingenious in its non-invasiveness. The pillow operates by using an AI system to continuously listen for snoring sounds. When it detects the user is snoring, the built-in airbag silently inflates. This subtle movement elevates the user's head, effectively opening the airway to stop the snoring without waking the sleeper.
+    ![10minds AI Motion Pillow and Motion System](../images/articles/10minds-putting-snoring-to-bed-motion-pillow-ces-2025/1.png)
+
+    ## Comfort Meets Data
+
+    The hardware itself is designed for maximum comfort, featuring high-quality memory foam and a design that emits no electromagnetic waves. Crucially, the inflation mechanism is engineered for low noise emission, ensuring the cure isn't as loud as the problem.
+
+    Beyond the physical intervention, the Motion Pillow ecosystem includes a companion app that tracks a "Good Sleep Score." By recording sleep duration and snoring time, it gives users quantifiable data on their rest. The results speak for themselves: clinical tests showed a reduction in snoring for 93.7% of participants, with an average snoring time reduction of 44.4%.
+
+    ## Availability
+
+    While 10minds will showcase their latest advancements at CES 2026, the technology is available today. The AI Motion Pillow retails for $489 and can be purchased directly from motionpillow.com.`,
+    category: ['CES 2025', 'Health Tech', 'AI', 'Smart Home'],
+    imageUrl: '../images/articles/10minds-putting-snoring-to-bed-motion-pillow-ces-2025/0.png',
+    date: 'Jan 28, 2025',
+    author: 'Hai Dao'
+  },
+  {
+    id: '3m-from-post-its-to-paint-bots-ces-2025',
+    title: 'From Post-its to Paint Bots: 3M\'s Material Science Revolution',
+    summary: '3M showcased a diverse array of innovations at CES 2025, from robotic paint repair to solar-powered audio, and teased a massive multi-industry sustainability initiative for CES 2026.',
+    content: `When you hear "3M," you likely think of the yellow Post-it note on your desk or the roll of Scotch tape in your drawer. But at CES 2025, the 120-year-old manufacturing giant reminded the world that it is the engineering minds behind so much more of our daily lives.
+
+    ## CES 2025: Material Science in Action
+
+    3M's booth this year was a masterclass in practical innovation, showcasing how advanced materials can solve everyday problems across industries.
+
+    ## Automating the Body Shop
+
+    One of the standout exhibits was the **Automated Car Paint Repair System** (powered by their **Finesse-it™** robotic technology). This system automates the tedious process of detecting and fixing paint defects on vehicles. It’s not just a concept; it represents a major leap in manufacturing efficiency, ensuring that the car you buy has a flawless finish without the heavy manual labor traditionally required.
+    ![3M Automated Car Paint Repair System](../images/articles/3m-from-post-its-to-paint-bots-ces-2025/1.png)
+
+    ##  Smarter Safety and Efficiency
+
+    The company also displayed a range of specialized gear:
+
+    1.  **Solar-Powered Hearing Protection:** The **3M™ WorkTunes™ Connect + Solar** hearing protector uses Powerfoyle™ technology to charge continuously from indoor and outdoor light, eliminating battery anxiety for workers.
+    2.  **ThinkPad Efficiency:** In the computing sector, 3M showcased a new energy-efficient film technology integrated into **Lenovo ThinkPad** laptops, designed to extend battery life by optimizing display brightness.
+    3.  **Industrial Gear:** Professionals were drawn to the **3M™ Speedglas™ Welding Helmets** and a new line of air filters featuring highly durable frames, proving that even functional industrial equipment can benefit from high-tech upgrades.
+
+    ## CES 2026: Turning Complexity into Uncomplicated
+
+    At CES 2026, 3M will continue their cross-industry partnership involving **General Motors, BMW, Kroger, and Lenovo**.
+
+    The collaboration aims to co-develop new materials that reduce waste and energy consumption across the automotive, retail, and computing sectors. By bringing these giants together, 3M intends to prove that the path to a greener future lies in simplifying the complex supply chains that power our world.`,
+    category: ['CES 2025', 'Material Science'],
+    imageUrl: '../images/articles/3m-from-post-its-to-paint-bots-ces-2025/0.png',
+    date: 'Feb 2, 2025',
     author: 'Hai Dao'
   }
 ];
