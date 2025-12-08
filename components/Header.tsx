@@ -1,10 +1,19 @@
-
-import React from 'react';
-import { Menu } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
 const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-deep-space/80 border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,6 +22,7 @@ const Header: React.FC = () => {
           <Link
             to="/"
             className="flex items-center cursor-pointer group"
+            onClick={closeMenu}
           >
             {/* Primary Logo: Circular Frame */}
             <div className="relative h-16 w-16 md:h-20 md:w-20 transition-transform duration-300 group-hover:scale-105">
@@ -35,12 +45,45 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu Button (Visible on small screens) */}
           <div className="md:hidden flex items-center gap-4">
-             <button className="text-gray-300 hover:text-white p-2">
-               <Menu className="w-6 h-6" />
+             <button
+               onClick={toggleMenu}
+               className="text-gray-300 hover:text-white p-2 focus:outline-none"
+               aria-label="Toggle menu"
+             >
+               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
              </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-24 left-0 w-full bg-deep-space/95 border-b border-white/10 backdrop-blur-xl animate-in fade-in slide-in-from-top-5 duration-300">
+          <nav className="flex flex-col px-4 py-6 space-y-4">
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className="text-white hover:text-neon-cyan hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium text-lg tracking-wide uppercase"
+            >
+              Latest
+            </Link>
+            <Link
+              to="/author/Hai%20Dao"
+              onClick={closeMenu}
+              className="text-gray-300 hover:text-neon-pink hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium text-lg tracking-wide uppercase"
+            >
+              Author
+            </Link>
+            <Link
+              to="/contact"
+              onClick={closeMenu}
+              className="text-gray-300 hover:text-neon-cyan hover:bg-white/5 px-4 py-3 rounded-lg transition-colors font-medium text-lg tracking-wide uppercase"
+            >
+              Contact
+            </Link>
+          </nav>
+        </div>
+      )}
 
       {/* Decorative Gradient Line */}
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neon-cyan to-transparent opacity-50"></div>
