@@ -16,6 +16,33 @@ const ArticleView: React.FC = () => {
   useEffect(() => {
     if (article) {
       document.title = `${article.title} | Tech Media Spotlight`;
+
+      // Update Meta Description
+      let metaDescription = document.querySelector("meta[name='description']");
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', article.summary);
+
+      // Update Meta Keywords
+      let metaKeywords = document.querySelector("meta[name='keywords']");
+      if (!metaKeywords) {
+        metaKeywords = document.createElement('meta');
+        metaKeywords.setAttribute('name', 'keywords');
+        document.head.appendChild(metaKeywords);
+      }
+      // Generate keywords from categories and title words
+      const keywords = [
+        ...article.category,
+        ...article.title.split(' ').filter(w => w.length > 3),
+        'Tech Media Spotlight',
+        'Technology News',
+        'Gadget Reviews'
+      ].join(', ');
+      metaKeywords.setAttribute('content', keywords);
+
       window.scrollTo(0, 0);
     }
   }, [article, id]);
