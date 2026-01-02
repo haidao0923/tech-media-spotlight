@@ -1,16 +1,20 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ArticleCard from './ArticleCard';
-import { User, ArrowLeft, Search } from 'lucide-react';
+import { User, ArrowLeft, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getAuthor } from '../authors';
 import { useParams, useNavigate } from 'react-router-dom';
 import { INITIAL_ARTICLES } from '../articles';
+
+const ITEMS_PER_PAGE = 6;
 
 const AuthorProfile: React.FC = () => {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
   const authorName = decodeURIComponent(name || '');
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Update SEO title
   useEffect(() => {
@@ -32,6 +36,23 @@ const AuthorProfile: React.FC = () => {
       article.category.some(cat => cat.toLowerCase().includes(query))
     );
   });
+
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentArticles = filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-500">
@@ -81,7 +102,7 @@ const AuthorProfile: React.FC = () => {
             <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchChange}
             placeholder={`Search ${authorName.split(' ')[0]}'s articles...`}
             className="bg-tech-surface/50 border border-white/10 text-white text-sm rounded-full pl-10 pr-4 py-2 w-full md:w-64 focus:w-full md:focus:w-80 transition-all duration-300 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan placeholder-gray-500 shadow-inner"
             />
@@ -89,16 +110,59 @@ const AuthorProfile: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div ref={containerRef} className="scroll-mt-32">
         {filteredArticles.length > 0 ? (
-          filteredArticles.map(article => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-            />
-          ))
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {currentArticles.map(article => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex justify-center items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <button
+                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="p-3 rounded-full bg-white/5 text-white hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white transition-all disabled:cursor-not-allowed border border-white/10"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+
+                <div className="flex items-center gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                        <button
+                            key={page}
+                            onClick={() => handlePageChange(page)}
+                            className={`w-10 h-10 rounded-full text-sm font-bold transition-all border ${
+                                currentPage === page
+                                ? 'bg-neon-pink text-white border-neon-pink shadow-[0_0_10px_rgba(255,0,255,0.5)]'
+                                : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20'
+                            }`}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                </div>
+
+                <button
+                  onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="p-3 rounded-full bg-white/5 text-white hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white transition-all disabled:cursor-not-allowed border border-white/10"
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            )}
+          </>
         ) : (
-          <div className="col-span-full py-20 text-center">
+          <div className="py-20 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 mb-4">
               <Search className="w-8 h-8 text-gray-500" />
             </div>

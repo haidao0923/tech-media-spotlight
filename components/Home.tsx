@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Hero from './Hero';
 import ArticleCard from './ArticleCard';
 import { Article } from '../types';
 import { INITIAL_ARTICLES } from '../articles';
-import { Search } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 
 interface HomeContextType {
@@ -11,11 +11,19 @@ interface HomeContextType {
   setSearchQuery: (query: string) => void;
 }
 
+const ITEMS_PER_PAGE = 6;
+
 const Home: React.FC = () => {
   const { searchQuery, setSearchQuery } = useOutletContext<HomeContextType>();
   const [articles] = useState<Article[]>(INITIAL_ARTICLES);
   const [featuredArticle, setFeaturedArticle] = useState<Article>(INITIAL_ARTICLES[0]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // State to track previous filter values for immediate pagination reset
+  const [prevSearchQuery, setPrevSearchQuery] = useState(searchQuery);
+  const [prevCategory, setPrevCategory] = useState(activeCategory);
 
   useEffect(() => {
     // Update document title for SEO
@@ -35,6 +43,14 @@ const Home: React.FC = () => {
     setFeaturedArticle(spotlight);
   }, [articles]);
 
+  // Reset pagination immediately when filters change to avoid blank pages during render
+  // This pattern ensures the render cycle restarts with currentPage=1 before painting
+  if (searchQuery !== prevSearchQuery || activeCategory !== prevCategory) {
+    setPrevSearchQuery(searchQuery);
+    setPrevCategory(activeCategory);
+    setCurrentPage(1);
+  }
+
   // Filter articles
   const filteredArticles = [...articles].reverse().filter(article => {
     const query = searchQuery.toLowerCase();
@@ -48,6 +64,19 @@ const Home: React.FC = () => {
     return matchesSearch && matchesCategory;
   });
 
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentArticles = filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Smooth scroll to top of list
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <>
       {/* Show Hero only when NOT searching */}
@@ -55,7 +84,10 @@ const Home: React.FC = () => {
         <Hero article={featuredArticle} />
       )}
 
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 ${searchQuery ? 'mt-12' : '-mt-20'}`}>
+      <div
+        ref={containerRef}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 scroll-mt-32 ${searchQuery ? 'mt-12' : '-mt-20'}`}
+      >
         <div className="flex flex-col xl:flex-row xl:items-end justify-between mb-8 pb-4 border-b border-white/10 gap-6">
 
           {/* Left Side: Title and Search */}
@@ -114,14 +146,55 @@ const Home: React.FC = () => {
         </div>
 
         {filteredArticles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredArticles.map(article => (
-              <ArticleCard
-                key={article.id}
-                article={article}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {currentArticles.map(article => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex justify-center items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <button
+                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="p-3 rounded-full bg-white/5 text-white hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white transition-all disabled:cursor-not-allowed border border-white/10"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+
+                <div className="flex items-center gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                        <button
+                            key={page}
+                            onClick={() => handlePageChange(page)}
+                            className={`w-10 h-10 rounded-full text-sm font-bold transition-all border ${
+                                currentPage === page
+                                ? 'bg-neon-pink text-white border-neon-pink shadow-[0_0_10px_rgba(255,0,255,0.5)]'
+                                : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20'
+                            }`}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                </div>
+
+                <button
+                  onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="p-3 rounded-full bg-white/5 text-white hover:bg-neon-cyan hover:text-black disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white transition-all disabled:cursor-not-allowed border border-white/10"
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="py-20 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 mb-4">

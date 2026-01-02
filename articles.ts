@@ -22,7 +22,7 @@ export const INITIAL_ARTICLES: Article[] = [
     Accenture's demonstration wasn't about showing off a new product for sale, but rather a public service announcement about the weaponization of Generative AI. By showing how little data is needed to create a convincing impersonation, they highlighted the urgent need for new verification standards in banking and security.
 
     As we move forward, the question isn't just "is this video real?", but "is my voice even my own?"`,
-    category: ['Spotlight', 'CES 2025', 'AI', 'Cybersecurity'],
+    category: ['Spotlight', 'AI', 'Cybersecurity'],
     imageUrl: '../images/articles/accenture-deepfake-ces-2025/0.png',
     date: 'Jan 13, 2025',
     author: 'Hai Dao'
@@ -54,7 +54,7 @@ export const INITIAL_ARTICLES: Article[] = [
     ## Customization is Key
 
     These gadgets were impressive, but the greatest aspect of Alps Alpine remains their flexibility. The company emphasized their ability to customize these sensors for each individual's specific use case, proving that even after nearly eight decades, they are still adapting to the future.`,
-    category: ['CES 2025', 'AI', 'Sensors', 'IoT'],
+    category: ['AI', 'Sensors', 'IoT'],
     imageUrl: '../images/articles/alps-alpine-customizable-sensors-to-extend-the-senses-ces-2025/0.png',
     date: 'Jan 14, 2025',
     author: 'Hai Dao'
@@ -87,7 +87,7 @@ export const INITIAL_ARTICLES: Article[] = [
     ## Availability
 
     While the wearable made its public bow at CES 2026, the company is keen to get the technology to consumers, opening preorders via their website at sims.technology. While a final preorder price has not been set, previous estimates in 2024 suggested a retail target of $199.`,
-    category: ['CES 2026', 'Wearables', 'AI', 'Consumer Tech'],
+    category: ['Wearables', 'AI', 'Consumer Tech'],
     imageUrl: '../images/articles/sims-technology-personal-safety-wearable-ces-2026/0.png',
     date: 'Jan 21, 2025',
     author: 'Hai Dao'
@@ -114,7 +114,7 @@ export const INITIAL_ARTICLES: Article[] = [
     ## Availability
 
     While 10minds will showcase their latest advancements at CES 2026, the technology is available today. The AI Motion Pillow retails for $489 and can be purchased directly from motionpillow.com.`,
-    category: ['CES 2025', 'Health Tech', 'AI'],
+    category: ['Health Tech', 'AI'],
     imageUrl: '../images/articles/10minds-putting-snoring-to-bed-motion-pillow-ces-2025/0.png',
     date: 'Jan 28, 2025',
     author: 'Hai Dao'
@@ -147,7 +147,7 @@ export const INITIAL_ARTICLES: Article[] = [
     At CES 2026, 3M will continue their cross-industry partnership involving **General Motors, BMW, Kroger, and Lenovo**.
 
     The collaboration aims to co-develop new materials that reduce waste and energy consumption across the automotive, retail, and computing sectors. By bringing these giants together, 3M intends to prove that the path to a greener future lies in simplifying the complex supply chains that power our world.`,
-    category: ['CES 2025', 'Material Science'],
+    category: ['Material Science'],
     imageUrl: '../images/articles/3m-from-post-its-to-paint-bots-ces-2025/0.png',
     date: 'Feb 2, 2025',
     author: 'Hai Dao'
@@ -170,7 +170,7 @@ export const INITIAL_ARTICLES: Article[] = [
     This edge AI algorithm runs directly on the chip, processing motion data at 200 Hz. It actively anticipates and corrects errors in real-time, effectively "locking" the sensor's orientation stability even in challenging environments.
 
     The Trifecta is available now for developers, promising to make the next generation of drones and droids straighter, steadier, and smarter.`,
-    category: ['CES 2026', 'Sensors'],
+    category: ['Sensors'],
     imageUrl: '../images/articles/4rge-ai-trifecta-sensor-imu-motion-tracking-ces-2026/0.png',
     date: 'Mar 4, 2025',
     author: 'Hai Dao'
@@ -201,7 +201,7 @@ export const INITIAL_ARTICLES: Article[] = [
     ## Availability
 
     Lingo is available now for consumers looking to decode their metabolic health. A 2-week subscription begin at $49 and can be purchased directly from hellolingo.com, no prescription required.`,
-    category: ['CES 2025', 'Health Tech', 'Wearables'],
+    category: ['Health Tech', 'Wearables'],
     imageUrl: '../images/articles/abbott-lingo-glucose-monitoring-biowearable/0.png',
     date: 'Mar 13, 2025',
     author: 'Hai Dao'
@@ -236,7 +236,7 @@ export const INITIAL_ARTICLES: Article[] = [
     Acknowledging the tight margins of small businesses, 17TRACK has structured its pricing to be accessible. The service is free for the first 50 shipments per month, allowing new stores to professionalize their logistics without upfront cost.
 
     Merchants can integrate the service immediately by visiting the Shopify app store or 17track.net.`,
-    category: ['CES 2026', 'SaaS', 'Business Tech'],
+    category: ['SaaS', 'Business Tech'],
     imageUrl: '../images/articles/17track-shopify-package-tracking/0.png',
     date: 'Apr 2, 2025',
     author: 'Hai Dao'
@@ -267,7 +267,7 @@ export const INITIAL_ARTICLES: Article[] = [
     The most impressive aspect of the demo was its practicality. 6P Color is the full box of crayons for your display, but it doesn't require throwing out the old box. The system is backward compatible with existing RGB technology.
 
     It integrates seamlessly with current cameras, processing tools, and displays. This means content creators can offer a massive visual upgrade without demanding an infrastructure overhaul, making the transition from the "triangle of RGB" to the full spectrum of reality easier than ever.`,
-    category: ['CES 2026', 'Display Tech'],
+    category: ['Display Tech'],
     imageUrl: '../images/articles/6p-color-full-color-range-display/0.png',
     date: 'Apr 24, 2025',
     author: 'Hai Dao'
@@ -302,9 +302,43 @@ export const INITIAL_ARTICLES: Article[] = [
 
 
     Unlike standard VR that isolates the user, their system projects digital scenarios and displays directly over existing combat training grounds. This allows soldiers to train with their physical equipment in real environments while interacting with digital threats, bridging the gap between simulation and reality.`,
-    category: ['CES 2026', 'Health Tech', 'AI'],
+    category: ['Health Tech', 'AI'],
     imageUrl: '../images/articles/a-zonetech-contactless-health-monitoring-and-vr-battlefield-training/0.png',
     date: 'May 5, 2025',
     author: 'Hai Dao'
-  }
+  },
+  {
+    id: 'ac-future-self-sustaining-smart-home',
+    title: 'The Future of Living: AC Future’s Self-Sustaining Smart Home',
+    summary: 'AC Future unveiled the first self-sustaining smart home that generates its own water from air and expands its living space at the touch of a button.',
+    content: `As urban centers become more crowded and the desire for off-grid freedom grows, AC Future is positioning itself as a leader in the next generation of housing. At CES 2026, the company showcased its vision for a solar-powered, fully autonomous living space.
+
+    ## A Home That Grows
+
+    The hallmark of the AC Future home is its modular flexibility. While the base unit features a compact interior living space of **400 square feet** (roughly the size of a two-car garage), the home is far from cramped.
+
+    The interior uses automated, collapsible furniture that hides away when not in use. Furthermore, owners can purchase additional modules—such as extra bedrooms, kitchens, or storage units—to expand the total footprint up to **1,200 square feet**.
+
+    ## Total Independence
+
+    What sets this smart home apart is its ability to function entirely without external utilities:
+
+    1.  **Water Generation:** The home can generate up to **50 liters of water a day** by extracting moisture from the humid ambient air.
+    2.  **Power:** The roof is a high-efficiency solar array, providing enough energy to power the home's appliances and climate control.
+    3.  **Connectivity:** Every unit comes with built-in high-speed internet, ensuring you stay connected even in the most remote locations.
+
+    ## Mobility and Pricing
+
+    AC Future is launching three distinct models to suit different lifestyles, all expected to be released commercially by the end of 2026:
+
+    * **Stationary Home ($108,000):** Designed as a permanent or semi-permanent ADU (Accessory Dwelling Unit).
+    * **Transportable Home ($148,000):** A mobile version designed to be moved between locations.
+    * **Drivable Home ($328,000):** A fully motorized, high-tech version of a luxury RV.
+
+    By blending architectural design with advanced material science, AC Future is proving that "home" doesn't have to be a fixed coordinate on a map.`,
+    category: ['Home Tech'],
+    imageUrl: '../images/articles/ac-future-self-sustaining-smart-home/0.png',
+    date: 'May 15, 2025',
+    author: 'Hai Dao'
+  },
 ];
